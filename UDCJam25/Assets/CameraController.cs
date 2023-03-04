@@ -35,8 +35,10 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        // Scroll
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+		target = GameManager.Instance.selectedCharacter;
+
+		// Scroll
+		if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             cam.orthographicSize -= Input.mouseScrollDelta.y * zoomSpeed * Time.deltaTime;
         }
