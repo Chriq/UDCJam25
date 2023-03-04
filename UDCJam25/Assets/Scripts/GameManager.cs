@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     public Board board;
+    public GameObject selectedCharacter;
 
     private static GameManager _instance;
     public static GameManager Instance { 
@@ -19,14 +20,15 @@ public class GameManager : MonoBehaviour {
 	private void Awake() {
         board = null;
         GameObject boardObj = GameObject.Find("Board");
-        
         if(boardObj != null ) {
             board = boardObj.GetComponent<Board>();
 		}
-
         if(board == null) {
             board = new GameObject("Board").AddComponent<Board>();
         }
+
+		selectedCharacter = GameObject.Find("Player");
+
 		DontDestroyOnLoad(gameObject);
 	}
 }

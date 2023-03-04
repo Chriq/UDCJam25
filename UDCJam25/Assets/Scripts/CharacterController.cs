@@ -48,6 +48,7 @@ public class CharacterController : MonoBehaviour
 
 	IEnumerator SelectCharacter() {
 		yield return new WaitForEndOfFrame();
+		GameManager.Instance.selectedCharacter = gameObject;
 		characterSelected = true;
 	}
 }

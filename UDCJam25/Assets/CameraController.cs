@@ -16,7 +16,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    GameObject main_char;
+    GameObject target;
     Camera cam;
 
     bool locked = true;
@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         cam = this.GetComponent<Camera>();
-        main_char = GameObject.Find("MainCharacter");
+        target = GameManager.Instance.selectedCharacter;
     }
 
     void Update()
@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
         // Locked - LERP to main character
         if (locked)
         {
-            transform.position = Vector3.Lerp(transform.position, main_char.transform.position + offset, lerpSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, target.transform.position + offset, lerpSpeed * Time.deltaTime);
         }
 
         // Unlocked - Free Camera through key or mouse press
