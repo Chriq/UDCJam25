@@ -2,38 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : ScriptableObject
-{
-    // Item Characteristics
-    public string item_name;
-    public Sprite item_icon;
-
-    // Combat Status
-    public float cooldown_timer;
-    public float cooldown_period;
-    public float success_probability;
-    public int ammo;
-
-    public virtual void Use(CombatEntity self, CombatEntity target)
-    {
-        // override
-        Debug.Log("Using Item " + item_name + " that does not override Use()!");
-    }
-    public void Update()
-    {
-        switch(ammo)
-        {
-            case 0:
-                ammo++;
-                cooldown_timer = 10;
-                break;
-            default:
-                cooldown_timer--;
-                break;
-        }
-    }
-}
-
 public class CombatEntity : MonoBehaviour
 {
     // Entity Charcteristics
@@ -50,6 +18,7 @@ public class CombatEntity : MonoBehaviour
     // Equipment
     [SerializeField] int n_items;
     [SerializeField] Item[] items;
+
 
     void Awake()
     {
@@ -80,9 +49,13 @@ public class CombatEntity : MonoBehaviour
     {
         stunned = true;
     }
+    public bool IsStunned()
+    {
+        return stunned;
+    }
     public void Shield(float protection)
     {
-        armor += protection;
+        armor = protection;
     }
 
     // Control Functions
