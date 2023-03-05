@@ -32,7 +32,7 @@ public class Board : MonoBehaviour {
 	}
 
 	public Tile GetTile(int x, int y) {
-		if(x < size.x && x < size.y) {
+		if(x < size.x && x < size.y && x >= 0 && y >= 0) {
 			return tiles[x, y];
 		}
 
@@ -42,4 +42,5 @@ public class Board : MonoBehaviour {
 
 public class Tile : MonoBehaviour {
 	public bool isOccupied = false;
+	public GameObject occupant;
 }
