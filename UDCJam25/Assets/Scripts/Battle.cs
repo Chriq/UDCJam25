@@ -19,19 +19,45 @@ public class Battle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if(GameManager.Instance.gameState == GameState.PLAYER_TURN) {
-            GameManager.Instance.selectedCharacter = GameObject.Find("Player");
-            StartCoroutine(PlayerTurn());
+			PlayerTurn();
         } else if(GameManager.Instance.gameState == GameState.ENEMY_TURN) {
-			GameManager.Instance.selectedCharacter = GameObject.Find("Enemy");
-            StartCoroutine(EnemyTurn());
-
+			Invoke("EnemyTurn", 2f);
         }
     }
 
-    IEnumerator EnemyTurn() {
+	void EnemyTurn() {
+		AIInput ai = GameManager.Instance.selectedCharacter.GetComponent<AIInput>();
+		if(ai != null) {
+			int moves = ai.Move();
+			currentEnemyPoints -= moves;
+		}
+
+		if(currentEnemyPoints <= 0) {
+			GameManager.Instance.SwitchGameState(GameState.PLAYER_TURN);
+			currentPlayerPoints = playerPointsPerTurn;
+			GameManager.Instance.selectedCharacter = GameObject.Find("Player");
+		}
+	}
+
+	void PlayerTurn() {
+		PlayerInput player = GameManager.Instance.selectedCharacter.GetComponent<PlayerInput>();
+		player.inputActive = true;
+		currentPlayerPoints -= player.lastMovement;
+		player.lastMovement = 0;
+
+		if(currentPlayerPoints <= 0) {
+			currentEnemyPoints = enemyPointsPerTurn;
+			if(player) {
+				player.inputActive = false;
+			}
+			GameManager.Instance.SwitchGameState(GameState.ENEMY_TURN);
+			GameManager.Instance.selectedCharacter = GameObject.Find("Enemy");
+		}
+	}
+
+	/*IEnumerator EnemyTurn() {
         yield return new WaitForSeconds(2);
         AIInput ai = GameManager.Instance.selectedCharacter.GetComponent<AIInput>();
         if(ai != null) {
@@ -45,7 +71,6 @@ public class Battle : MonoBehaviour
 			GameManager.Instance.SwitchGameState(GameState.PLAYER_TURN);
 			currentPlayerPoints = playerPointsPerTurn;
 		}
-        
 	}
 
     IEnumerator PlayerTurn() {
@@ -63,5 +88,5 @@ public class Battle : MonoBehaviour
             }
 			GameManager.Instance.SwitchGameState(GameState.ENEMY_TURN);
 		}
-	}
+	}*/
 }

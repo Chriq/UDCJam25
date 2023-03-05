@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
             board = new GameObject("Board").AddComponent<Board>();
         }
 
-		selectedCharacter = GameObject.Find("Player");
+		selectedCharacter = GameObject.FindGameObjectWithTag("Player");
 
         gameState = GameState.RPG;
 
@@ -37,6 +37,20 @@ public class GameManager : MonoBehaviour {
 
     public void SwitchGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    // returns 'ok' if cell is free, otherwise return object tag
+    public string ValidateCharacterMovement(Vector2Int destination) {
+        Tile tile = board.GetTile(destination.x, destination.y);
+        if(tile) {
+            if(tile.isOccupied) {
+                return tile.occupant.tag.Equals("Untagged") ? "occupied" : tile.occupant.tag;
+            } else {
+                return "ok";
+            }
+        } else {
+            return "occupied";
+        }
     }
 }
 

@@ -13,13 +13,15 @@ public class CharacterController : MonoBehaviour
     {
 		transform.position = new Vector3(startingPosition.x, startingPosition.y);
 		GameManager.Instance.board.GetTile(startingPosition.x, startingPosition.y).isOccupied = true;
+		GameManager.Instance.board.GetTile(startingPosition.x, startingPosition.y).occupant = gameObject;
 	}
 
     public int SetCharacterPosition(Vector2Int pos) {
 		GameManager.Instance.board.GetTile((int) transform.position.x, (int) transform.position.y).isOccupied = false;
 		transform.position = new Vector3(pos.x, pos.y);
 		GameManager.Instance.board.GetTile(pos.x, pos.y).isOccupied = true;
-		return 10;
+		GameManager.Instance.board.GetTile(pos.x, pos.y).occupant = gameObject;
+		return 4;
 	}
 
 	private void OnMouseDown() {
@@ -31,6 +33,7 @@ public class CharacterController : MonoBehaviour
 
 	IEnumerator SelectCharacter() {
 		yield return new WaitForEndOfFrame();
+		Debug.Log(gameObject.name);
 		GameManager.Instance.selectedCharacter = gameObject;
 		characterSelected = true;
 	}

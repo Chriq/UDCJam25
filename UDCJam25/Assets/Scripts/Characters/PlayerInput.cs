@@ -14,17 +14,19 @@ public class PlayerInput : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
-    {
+	void Update() {
 		if(Input.GetMouseButtonDown(0) && inputActive) {
-			if(!controller.characterSelected) {
-
-			} else {
+			if(controller.characterSelected) {
 				Vector3 mouseDown = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				Vector2Int toCell = new Vector2Int(Mathf.RoundToInt(mouseDown.x), Mathf.RoundToInt(mouseDown.y));
 
-				lastMovement = controller.SetCharacterPosition(toCell);
-				controller.characterSelected = false;
+				string cellValidation = GameManager.Instance.ValidateCharacterMovement(toCell);
+				if(cellValidation.Equals("ok")) {
+					lastMovement = controller.SetCharacterPosition(toCell);
+					controller.characterSelected = false;
+				} else if(cellValidation.Equals("Player")) {
+					controller.characterSelected = false;
+				}
 			}
 		}
 	}
