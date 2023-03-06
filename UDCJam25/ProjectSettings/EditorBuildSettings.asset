@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SampleSceneChristian.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -14,4 +14,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleSceneJack.unity
     guid: 1c78ae4ff811b1643a7ce5e2bb954d75
+  - enabled: 1
+    path: Assets/Scenes/Scene_Carnegie.unity
+    guid: 3de7e410b79841d479579a51b1e5b009
+  - enabled: 1
+    path: Assets/Scenes/Scene_Ford.unity
+    guid: 0833a5b0d815b0c499ada2197e00b920
+  - enabled: 1
+    path: Assets/Scenes/Scene_JPMorgan.unity
+    guid: a6dbec4f0bd877b41bf27b8731770dd9
+  - enabled: 1
+    path: Assets/Scenes/Scene_Rockefeller.unity
+    guid: 0eb0a46e065527d4d885804d0801c8c0
+  - enabled: 1
+    path: Assets/Scenes/Scene_Vanderbilt.unity
+    guid: a9cf60c496011d84989cf97be63d5f01
   m_configObjects: {}

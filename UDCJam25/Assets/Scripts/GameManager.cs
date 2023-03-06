@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
 
         gameState = GameState.RPG;
 
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 	}
 
     public void SwitchGameState(GameState gameState) {

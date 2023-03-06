@@ -6,7 +6,7 @@ using static UnityEditor.PlayerSettings;
 public class CharacterController : MonoBehaviour
 {
 	public Vector2Int startingPosition;
-	public float characterSpeed = 5f;
+	public float characterSpeed = 10f;
 	public bool characterSelected = false;
 
 	private Vector2Int newPos;
@@ -30,10 +30,9 @@ public class CharacterController : MonoBehaviour
 
     public int SetCharacterPosition(Vector2Int pos) {
 		GameManager.Instance.board.GetTile((int) transform.position.x, (int) transform.position.y).isOccupied = false;
-		//transform.position = new Vector3(pos.x, pos.y);
 		newPos = pos;
-		diffX = newPos.x - transform.position.x;
-		diffY = newPos.y - transform.position.y;
+		diffX = (newPos.x - transform.position.x) / Mathf.Abs(newPos.x - transform.position.x);
+		diffY = (newPos.y - transform.position.y) / Mathf.Abs(newPos.y - transform.position.y);
 		GameManager.Instance.board.GetTile(pos.x, pos.y).isOccupied = true;
 		GameManager.Instance.board.GetTile(pos.x, pos.y).occupant = gameObject;
 		return 4;
@@ -42,7 +41,8 @@ public class CharacterController : MonoBehaviour
 	private void Update() {
 		if(transform.position != new Vector3(newPos.x, newPos.y)) {
 			if(transform.position.x != newPos.x) {
-				if(Mathf.Abs(transform.position.x - newPos.x) < 0.1) {
+				Debug.Log(diffX);
+				if(Mathf.Abs(transform.position.x - newPos.x) < 0.2) {
 					transform.position = new Vector3(newPos.x, transform.position.y);
 				} else {
 					float increment = diffX * characterSpeed * Time.deltaTime;
@@ -51,7 +51,7 @@ public class CharacterController : MonoBehaviour
 			} 
 			
 			else if(transform.position.y != newPos.y) {
-				if(Mathf.Abs(transform.position.y - newPos.y) < 0.1) {
+				if(Mathf.Abs(transform.position.y - newPos.y) < 0.2) {
 					transform.position = new Vector3(transform.position.x, newPos.y);
 				} else {
 					float increment = diffY * characterSpeed * Time.deltaTime;
