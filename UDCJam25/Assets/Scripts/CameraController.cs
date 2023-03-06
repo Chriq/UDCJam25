@@ -22,10 +22,12 @@ public class CameraController : MonoBehaviour
     bool locked = true;
     Vector3 offset = Vector3.back;
 
-    public float camSpeed = 10f;
-    public float zoomSpeed = 100f;
-    public float lerpSpeed = 3f;
-    public float borderWidth = 20f;
+    [SerializeField] float min_zoom = 1;
+    [SerializeField] float max_zoom = 10;
+    [SerializeField] float camSpeed = 10f;
+    [SerializeField] float zoomSpeed = 50f;
+    [SerializeField] float lerpSpeed = 3f;
+    [SerializeField] float borderWidth = 20f;
 
     private void Awake()
     {
@@ -40,7 +42,7 @@ public class CameraController : MonoBehaviour
 		// Scroll
 		if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            cam.orthographicSize -= Input.mouseScrollDelta.y * zoomSpeed * Time.deltaTime;
+            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - Input.mouseScrollDelta.y * zoomSpeed * Time.deltaTime, min_zoom, max_zoom);
         }
 
         // Toggle Lock

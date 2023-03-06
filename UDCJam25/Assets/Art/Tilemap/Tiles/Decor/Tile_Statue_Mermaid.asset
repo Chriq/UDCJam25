@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Tile_Grass
+  m_Name: Tile_Statue_Mermaid
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1560652304, guid: 9e8dd8ddc317fc446807fbb84fe9d9f1, type: 3}
+  m_Sprite: {fileID: -1294116250, guid: 9e8dd8ddc317fc446807fbb84fe9d9f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
