@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CombatEntity : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CombatEntity : MonoBehaviour
     [SerializeField] float wit;
 
     // Combat Status
-    float health;
+    public float health;
     bool stunned;
     float armor;
 
@@ -19,10 +20,14 @@ public class CombatEntity : MonoBehaviour
     [SerializeField] int n_items;
     [SerializeField] Item[] items;
 
+    public OnKilledEvent onKilledEvent;
 
     void Awake()
     {
         health = base_health;
+        if(onKilledEvent == null) {
+            onKilledEvent = new OnKilledEvent();
+        }
     }
 
     // Combat Modifications
@@ -37,7 +42,7 @@ public class CombatEntity : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            // TODO: Check scene for end of combat situations
+            onKilledEvent.Invoke(this.gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -59,13 +64,15 @@ public class CombatEntity : MonoBehaviour
     }
 
     // Control Functions
-    public void UseItem(int item, CombatEntity target)
+    public int UseItem(int item, CombatEntity target)
     {
         if (item >= n_items)
         {
             Debug.LogError("ERROR: item index, " + item.ToString() + ", >= number of items," + n_items.ToString());
-            return;
+            return 0;
         }
-        items[item].Use(this, target);
+        return items[item].Use(this, target);
     }
 }
+
+public class OnKilledEvent: UnityEvent<GameObject> {}

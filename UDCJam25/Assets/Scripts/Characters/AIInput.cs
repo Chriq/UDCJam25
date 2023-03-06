@@ -13,4 +13,9 @@ public class AIInput : MonoBehaviour
 	public int Move() {
 		return controller.SetCharacterPosition(new Vector2Int (3, 3));
 	}
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		GameObject.Find("Battle").GetComponent<Battle>().enabled = true;
+		;
+	}
 }

@@ -52,6 +52,15 @@ public class GameManager : MonoBehaviour {
             return "occupied";
         }
     }
+
+    public GameObject GetTileOccupant(Vector2Int tile) {
+        Tile boardTile = board.GetTile(tile.x, tile.y);
+        if(boardTile && boardTile.isOccupied && boardTile.occupant) {
+            return boardTile.occupant;
+		}
+
+        return null;
+    }
 }
 
 public enum GameState {
