@@ -49,6 +49,7 @@ public class EnumMaskDrawer : PropertyDrawer
 
 /* https://pavcreations.com/equipment-system-for-an-rpg-unity-game/#The-concepts-of-the-equipment-system */
 [CreateAssetMenu(menuName = "ScriptableObjects/GameItem")]
+[System.Serializable]
 public class Item : ScriptableObject
 {
     // Item Characteristics
@@ -62,12 +63,13 @@ public class Item : ScriptableObject
     [SerializeField] float value_target;
     [SerializeField] float value_self;
     [SerializeField] float success_probability;
+    [SerializeField] int use_cost;
 
     // Combat Status
     int cooldown_timer;
     int ammo;
 
-    public void Use(CombatEntity self, CombatEntity target)
+    public int Use(CombatEntity self, CombatEntity target)
     {
         if (cooldown_timer > 0)
             Debug.LogError("Error - using item " + this.name + "/" + item_name + " when on cooldown!");
@@ -77,7 +79,7 @@ public class Item : ScriptableObject
 
         if (UnityEngine.Random.Range(0, 1) > success_probability)
         {
-            return;
+            return use_cost;
         }
 
         if ((item_effects & (int)ItemEffects.Damage_Target) != 0)
@@ -112,6 +114,8 @@ public class Item : ScriptableObject
         {
             self.Shield(value_self);
         }
+
+        return use_cost;
     }
 
     public void Update()
