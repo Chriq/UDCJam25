@@ -9,6 +9,7 @@ public class SelectorController : MonoBehaviour
     GameObject UI_Interactable;
     GameObject UI_Invalid;
     Interactable interact_component;
+    PlayerInput player_component;
 
     private void Awake()
     {
@@ -22,12 +23,17 @@ public class SelectorController : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Interactable>(out interact_component))
         {
             UI_Interactable.SetActive(true);
+        } 
+        else
+        {
+            collision.gameObject.TryGetComponent<PlayerInput>(out player_component);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         UI_Interactable.SetActive(false);
         interact_component = null;
+        player_component = null;
     }
 
     void Update()
@@ -49,6 +55,10 @@ public class SelectorController : MonoBehaviour
             if (interact_component != null)
             {
                 interact_component.Interact();
+            }
+            
+            else if(player_component != null) {
+                player_component.ProcessMovementInput();
             }
         }
     }

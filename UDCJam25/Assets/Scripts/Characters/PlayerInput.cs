@@ -45,15 +45,8 @@ public class PlayerInput : MonoBehaviour
 		}
 	}
 
-	public Vector2Int ProcessMovementInput() {
-		Vector3 mouseDown = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		return new Vector2Int(Mathf.RoundToInt(mouseDown.x), Mathf.RoundToInt(mouseDown.y));
-	}
-
-	private void OnMouseDown() {
-		if(Input.GetMouseButtonDown(0)) {
-			StartCoroutine(SelectCharacter());
-		}
+	public void ProcessMovementInput() {
+		StartCoroutine(SelectCharacter());
 	}
 
 	IEnumerator SelectCharacter() {
