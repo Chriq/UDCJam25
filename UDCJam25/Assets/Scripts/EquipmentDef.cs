@@ -1,11 +1,9 @@
-using System;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Effects Enumerator
-public enum ItemEffects
+enum ItemEffects
 {
     Damage_Target   = 1 << 0,
     Damage_Self     = 1 << 1,
@@ -15,36 +13,6 @@ public enum ItemEffects
     Stun_Self       = 1 << 5,
     Shield_Target   = 1 << 6,
     Shield_Self     = 1 << 7,
-}
-
-/* https://forum.unity.com/threads/editor-bit-mask.16841/ */
-public class EnumMaskAttribute : PropertyAttribute
-{
-    public Type EnumType;
-    public Enum Enum;
-    public EnumMaskAttribute(Type enumType)
-    {
-        this.EnumType = enumType;
-        this.Enum = (Enum)Enum.GetValues(enumType).GetValue(0);
-    }
-}
-[CustomPropertyDrawer(typeof(EnumMaskAttribute))]
-public class EnumMaskDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        EnumMaskAttribute enumMaskAttribute = attribute as EnumMaskAttribute;
-        enumMaskAttribute.Enum = EditorGUI.EnumFlagsField(position, label, enumMaskAttribute.Enum);
-        if (enumMaskAttribute.EnumType == typeof(Enum))
-        {
-            Debug.Log(enumMaskAttribute.Enum);
-            property.intValue = Convert.ToInt32(Enum.Parse(enumMaskAttribute.EnumType, Enum.GetName(enumMaskAttribute.EnumType, enumMaskAttribute.Enum)));
-        }
-        else
-        {
-            property.intValue = Convert.ToInt32(enumMaskAttribute.Enum);
-        }
-    }
 }
 
 /* https://pavcreations.com/equipment-system-for-an-rpg-unity-game/#The-concepts-of-the-equipment-system */
@@ -75,7 +43,7 @@ public class Item : ScriptableObject
         ammo--;
         cooldown_timer = cooldown_period;
 
-        if (UnityEngine.Random.Range(0, 1) > success_probability)
+        if (Random.Range(0, 1) > success_probability)
         {
             return;
         }
