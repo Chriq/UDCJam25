@@ -24,8 +24,10 @@ public class PlayerInput : MonoBehaviour
 
 				string cellValidation = GameManager.Instance.ValidateCharacterMovement(toCell);
 				if(cellValidation.Equals("ok")) {
-					lastMovement = controller.SetCharacterPosition(toCell);
-					controller.characterSelected = false;
+					if(GameManager.Instance.board.GetTile(toCell.x, toCell.y).tileData.height == GameManager.Instance.board.GetTile(controller.currentPosition.x, controller.currentPosition.y).tileData.height) {
+						lastMovement = controller.SetCharacterPosition(toCell);
+						controller.characterSelected = false;
+					}
 				} else if(cellValidation.Equals("Player")) {
 					controller.characterSelected = false;
 				} else if(cellValidation.Equals("Enemy")) {

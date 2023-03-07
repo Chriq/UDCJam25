@@ -59,6 +59,46 @@ public class GameManager : MonoBehaviour {
 
         return null;
     }
+
+    public void ChangeCharacterElevation(int int_effects_value, Vector3 int_location) {
+        Vector2Int gridLocation = new Vector2Int((int) int_location.x, (int) int_location.y);
+        CharacterController characterController;
+        switch(int_effects_value) {
+            case 7: // left
+                if(selectedCharacter && selectedCharacter.TryGetComponent<CharacterController>(out characterController)) {
+					characterController.characterSelected = false;
+                    if(board.GetTile((int)characterController.transform.position.x, (int)characterController.transform.position.y).tileData.height == 0) {
+                        characterController.SetCharacterPosition(gridLocation + new Vector2Int(1, 0));
+                    } else {
+						characterController.SetCharacterPosition(gridLocation - new Vector2Int(1, 0));
+					}
+					
+                }
+                break;
+            case 8: // right
+				if(selectedCharacter && selectedCharacter.TryGetComponent<CharacterController>(out characterController)) {
+                    characterController.characterSelected = false;
+					if(board.GetTile((int)characterController.transform.position.x, (int)characterController.transform.position.y).tileData.height == 0) {
+						characterController.SetCharacterPosition(gridLocation + new Vector2Int(-1, 0));
+					} else {
+						characterController.SetCharacterPosition(gridLocation - new Vector2Int(-1, 0));
+					}
+					
+				}
+				break;
+            case 9: // bottom
+				if(selectedCharacter && selectedCharacter.TryGetComponent<CharacterController>(out characterController)) {
+					characterController.characterSelected = false;
+					if(board.GetTile((int)characterController.transform.position.x, (int)characterController.transform.position.y).tileData.height == 0) {
+						characterController.SetCharacterPosition(gridLocation + new Vector2Int(0, 1));
+					} else {
+						characterController.SetCharacterPosition(gridLocation - new Vector2Int(0, 1));
+					}
+				}
+				break;
+            default: break;
+        }
+    }
 }
 
 public enum GameState {

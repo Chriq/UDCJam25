@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2c2cb89d91aee4295f83f16240d1ad, type: 3}
+  m_Name: Cliff
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: bc9c2f329fa48684bb824feaa72b331e, type: 2}
+  - {fileID: 11400000, guid: 50279ceaec4e12f41acede7b2f853559, type: 2}
+  - {fileID: 11400000, guid: 55aacd6481e4f3e4286b03441ea570df, type: 2}
+  - {fileID: 11400000, guid: a04c82768125dc14e9b18c6660213010, type: 2}
+  - {fileID: 11400000, guid: e89bc150942566f4084cf5c0f4770016, type: 2}
+  - {fileID: 11400000, guid: a09c3e1ef5439aa46bba078a2728e099, type: 2}
+  - {fileID: 11400000, guid: 3719b2af95e2c844dad3dc482e10963b, type: 2}
+  - {fileID: 11400000, guid: b3b3cb9061fa55f4190d848d571dd2a2, type: 2}
+  - {fileID: 11400000, guid: a53cc59ec72977748831ddb5d7c121fd, type: 2}
+  height: 1

@@ -9,7 +9,7 @@ public class CharacterController : MonoBehaviour
 	public float characterSpeed = 10f;
 	public bool characterSelected = false;
 
-	private Vector2Int newPos;
+	public Vector2Int currentPosition;
 	float diffX;
 	float diffY;
 
@@ -22,7 +22,7 @@ public class CharacterController : MonoBehaviour
 			startingPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
 		}
 		
-		newPos = startingPosition;
+		currentPosition = startingPosition;
 
 		GameManager.Instance.board.GetTile(startingPosition.x, startingPosition.y).isOccupied = true;
 		GameManager.Instance.board.GetTile(startingPosition.x, startingPosition.y).occupant = gameObject;
@@ -30,29 +30,29 @@ public class CharacterController : MonoBehaviour
 
     public int SetCharacterPosition(Vector2Int pos) {
 		GameManager.Instance.board.GetTile((int) transform.position.x, (int) transform.position.y).isOccupied = false;
-		newPos = pos;
-		diffX = (newPos.x - transform.position.x) / Mathf.Abs(newPos.x - transform.position.x);
-		diffY = (newPos.y - transform.position.y) / Mathf.Abs(newPos.y - transform.position.y);
+		currentPosition = pos;
+		diffX = (currentPosition.x - transform.position.x) / Mathf.Abs(currentPosition.x - transform.position.x);
+		diffY = (currentPosition.y - transform.position.y) / Mathf.Abs(currentPosition.y - transform.position.y);
 		GameManager.Instance.board.GetTile(pos.x, pos.y).isOccupied = true;
 		GameManager.Instance.board.GetTile(pos.x, pos.y).occupant = gameObject;
 		return 4;
 	}
 
 	private void Update() {
-		if(transform.position != new Vector3(newPos.x, newPos.y)) {
-			if(transform.position.x != newPos.x) {
+		if(transform.position != new Vector3(currentPosition.x, currentPosition.y)) {
+			if(transform.position.x != currentPosition.x) {
 				Debug.Log(diffX);
-				if(Mathf.Abs(transform.position.x - newPos.x) < 0.2) {
-					transform.position = new Vector3(newPos.x, transform.position.y);
+				if(Mathf.Abs(transform.position.x - currentPosition.x) < 0.2) {
+					transform.position = new Vector3(currentPosition.x, transform.position.y);
 				} else {
 					float increment = diffX * characterSpeed * Time.deltaTime;
 					transform.position += new Vector3(increment, 0);
 				}
 			} 
 			
-			else if(transform.position.y != newPos.y) {
-				if(Mathf.Abs(transform.position.y - newPos.y) < 0.2) {
-					transform.position = new Vector3(transform.position.x, newPos.y);
+			else if(transform.position.y != currentPosition.y) {
+				if(Mathf.Abs(transform.position.y - currentPosition.y) < 0.2) {
+					transform.position = new Vector3(transform.position.x, currentPosition.y);
 				} else {
 					float increment = diffY * characterSpeed * Time.deltaTime;
 					transform.position += new Vector3(0, increment);

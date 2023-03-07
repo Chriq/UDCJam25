@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Board : MonoBehaviour {
 	// x = rows; y = cols;
 	public Vector2Int size;
-
+	public List<TileData> tileDataList;
+	public Tilemap tilemap;
 	public Tile[,] tiles;
 	//public SpriteRenderer spriteRenderer;
 
@@ -14,7 +17,6 @@ public class Board : MonoBehaviour {
 
 	private void Awake() {
 		tiles = new Tile[size.x, size.y];
-
 		GenerateBoard();
 	}
 
@@ -26,6 +28,15 @@ public class Board : MonoBehaviour {
 				tile.isOccupied = false;
 				tile.transform.position = new Vector2(col, row);
 
+				tile.tileData = tileDataList[0];
+				foreach(TileBase tileBase in tileDataList[1].tiles) {
+					TileBase tb = tilemap.GetTile(new Vector3Int(col, row, 0));
+					if(tb && tb.Equals(tileBase)) {
+						tile.tileData = tileDataList[1];
+					}
+				}
+				
+
 				tiles[col, row] = tile;
 			}
 		}
@@ -35,7 +46,7 @@ public class Board : MonoBehaviour {
 		if(x < size.x && x < size.y && x >= 0 && y >= 0) {
 			return tiles[x, y];
 		}
-
+		
 		return null;
 	}
 }
@@ -43,4 +54,5 @@ public class Board : MonoBehaviour {
 public class Tile : MonoBehaviour {
 	public bool isOccupied = false;
 	public GameObject occupant;
+	public TileData tileData;
 }

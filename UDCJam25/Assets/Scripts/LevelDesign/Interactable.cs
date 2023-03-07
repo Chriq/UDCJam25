@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 enum InteractableEffects
 {
     Load_Scene          = 1,
+    Change_Elevation    = 2,
 }
 enum InteractableEffectsValue
 {
@@ -16,6 +17,10 @@ enum InteractableEffectsValue
     Scene_4             = 4,
     Scene_5             = 5,
     Scene_6             = 6,
+
+	Elevation_Left      = 7,
+	Elevation_Right     = 8,
+	Elevation_Bottom    = 9,
 }
 
 public class Interactable : MonoBehaviour
@@ -28,6 +33,9 @@ public class Interactable : MonoBehaviour
         if (int_effect == InteractableEffects.Load_Scene)
         {
             SceneManager.LoadScene((int)int_effects_value);
-        }
-    }
+        } 
+        else if((int_effect == InteractableEffects.Change_Elevation)) {
+			GameManager.Instance.ChangeCharacterElevation((int)int_effects_value, gameObject.transform.position);
+		}
+	}
 }
