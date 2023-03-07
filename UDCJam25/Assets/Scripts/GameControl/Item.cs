@@ -25,9 +25,9 @@ public class Item : ScriptableObject
     public Sprite item_icon;
 
     [SerializeField] [EnumMask(typeof(ItemEffects))] int item_effects;
-    [SerializeField] int cooldown_period;
+    [SerializeField] public int cooldown_period;
     [SerializeField] int reload_period;
-    [SerializeField] int ammunition;
+    [SerializeField] public int ammunition;
     [SerializeField] public float value_target;
     [SerializeField] public float value_self;
     [SerializeField] float success_probability;

@@ -3,14 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class CombatEntity : MonoBehaviour
 {
     // Entity Charcteristics
+    [SerializeField] public string character_name;
+    [SerializeField] public string character_desc;
     [SerializeField] float base_health;
+    /*
     [SerializeField] float strength;
     [SerializeField] float weight;
     [SerializeField] float wit;
+    */
 
     // Combat Status
     public float health;
@@ -18,7 +23,7 @@ public class CombatEntity : MonoBehaviour
     float armor;
 
     // Equipment
-    [SerializeField] List<Item> items;
+    [SerializeField] public List<Item> items;
 
     public OnKilledEvent onKilledEvent;
 

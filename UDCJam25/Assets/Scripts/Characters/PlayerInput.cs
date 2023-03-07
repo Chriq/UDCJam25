@@ -51,7 +51,7 @@ public class PlayerInput : MonoBehaviour
 
 	IEnumerator SelectCharacter() {
 		yield return new WaitForEndOfFrame();
-		GameManager.Instance.selectedCharacter = gameObject;
+		GameManager.Instance.SetSelectedCharacter(gameObject);
 		controller.characterSelected = true;
 	}
 }

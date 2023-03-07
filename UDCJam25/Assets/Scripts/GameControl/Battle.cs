@@ -85,7 +85,7 @@ public class Battle : MonoBehaviour
 		// End Turn
 		GameManager.Instance.SwitchGameState(GameState.PLAYER_TURN);
 		UpdatePlayerActions(playerPointsPerTurn, 0);
-		GameManager.Instance.selectedCharacter = GameObject.Find("Player");
+		GameManager.Instance.SetSelectedCharacter(GameObject.Find("Player"));
 	}
 
 	void PlayerTurn() {
@@ -106,12 +106,12 @@ public class Battle : MonoBehaviour
 				player.inputActive = false;
 			}
 			GameManager.Instance.SwitchGameState(GameState.ENEMY_TURN);
-			GameManager.Instance.selectedCharacter = GameObject.Find("Enemy");
+			GameManager.Instance.SetSelectedCharacter(GameObject.Find("Enemy"));
 		}
 	}
 
 	void WinBattle() {
-		GameManager.Instance.selectedCharacter = GameObject.Find("Player");
+		GameManager.Instance.SetSelectedCharacter(GameObject.Find("Player"));
 		GameManager.Instance.SwitchGameState(GameState.RPG);
 		Destroy(gameObject);
 	}

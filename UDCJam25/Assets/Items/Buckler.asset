@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b3aa1719776d39140adb1f6b48d5354f, type: 3}
   m_Name: Buckler
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  item_name: Buckler
+  item_name: 
   item_icon: {fileID: 0}
   item_effects: 1
-  cooldown_period: 2
-  reload_period: 3
-  ammunition: 6
+  cooldown_period: 0
+  reload_period: 0
+  ammunition: 0
   value_target: 0
-  value_self: 2
-  success_probability: 1
+  value_self: 0
+  success_probability: 0
+  use_range: 0
+  use_cost: 0

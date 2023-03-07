@@ -1,7 +1,10 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
     public Board board;
@@ -9,6 +12,16 @@ public class GameManager : MonoBehaviour {
     public GameState gameState;
 
     private static GameManager _instance;
+
+    [SerializeField]
+    TMP_Text selected_name;
+    [SerializeField]
+    TMP_Text selected_desc;
+    [SerializeField]
+    GameObject[] selected_items;
+    [SerializeField]
+    List<List<TMP_Text>> selected_items_text;
+
     public static GameManager Instance { 
         get { 
             if(_instance == null) {
@@ -28,10 +41,44 @@ public class GameManager : MonoBehaviour {
             board = new GameObject("Board").AddComponent<Board>();
         }
 
-		selectedCharacter = GameObject.FindGameObjectWithTag("Player");
+		selected_name = GameObject.FindGameObjectWithTag("UI_Selected_Name").GetComponent<TMP_Text>();
+        selected_desc = GameObject.FindGameObjectWithTag("UI_Selected_Desc").GetComponent<TMP_Text>();
+        selected_items = GameObject.FindGameObjectsWithTag("UI_Items");
+        selected_items_text = selected_items.Select(
+            obj => obj.GetComponentsInChildren<TMP_Text>().ToList<TMP_Text>()
+            ).ToList<List<TMP_Text>>();
+
+        SetSelectedCharacter(GameObject.FindGameObjectWithTag("Player"));
 
         gameState = GameState.RPG;
 	}
+
+    public void SetSelectedCharacter(GameObject sel)
+    {
+        selectedCharacter = sel;
+        List<Item> char_items = selectedCharacter.GetComponent<CombatEntity>().items;
+
+        for (int i = 0; i < char_items.Count; i++)
+        {
+            Item item = char_items[i];
+            selected_items_text[i][0].text = item.item_name;
+            selected_items_text[i][2].text = item.ammunition.ToString();
+            if (item.cooldown_timer > 0)
+            {
+                selected_items[i].GetComponent<Button>().interactable = false;
+                selected_items_text[i][1].text = item.cooldown_timer.ToString();
+            }
+            else
+            {
+                selected_items[i].GetComponent<Button>().interactable = true;
+                selected_items_text[i][1].text = item.cooldown_period.ToString();
+            }
+        }
+        for (int i = char_items.Count; i < 5; i++)
+        {
+            selected_items[i].SetActive(false);
+        }
+    }
 
     public void SwitchGameState(GameState gameState) {
         this.gameState = gameState;
