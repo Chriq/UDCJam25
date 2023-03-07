@@ -46,10 +46,9 @@ public class SelectorController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // UI Click
-            /*
-                if (EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current.IsPointerOverGameObject())
                 return;
-            */
+            
             
             // Scene Interactable
             if (interact_component != null)
