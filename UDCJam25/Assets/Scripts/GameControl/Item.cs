@@ -28,17 +28,20 @@ public class Item : ScriptableObject
     [SerializeField] int cooldown_period;
     [SerializeField] int reload_period;
     [SerializeField] int ammunition;
-    [SerializeField] float value_target;
-    [SerializeField] float value_self;
+    [SerializeField] public float value_target;
+    [SerializeField] public float value_self;
     [SerializeField] float success_probability;
-    [SerializeField] int use_cost;
+    [SerializeField] public int use_range;
+    [SerializeField] public int use_cost;
 
     // Combat Status
-    int cooldown_timer;
+    public int cooldown_timer { get; private set; }
     int ammo;
 
     public int Use(CombatEntity self, CombatEntity target)
     {
+        Debug.Log("USE");
+
         if (cooldown_timer > 0)
             Debug.LogError("Error - using item " + this.name + "/" + item_name + " when on cooldown!");
 

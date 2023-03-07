@@ -6,24 +6,18 @@ public class ToolTip : MonoBehaviour
 {
     [SerializeField] string tt_name;
     [SerializeField] string tt_description;
-    [SerializeField] bool active;
 
-    private void Awake()
+    void TT_Show()
     {
-        active = true;
+        ToolTipManager._instance.ToolTip(tt_name, tt_description);
     }
-    public void Disable()
-    {
-        active = false;
-    }
-
     void OnMouseEnter()
     {
-        if (active)
-            ToolTipManager._instance.ToolTip(tt_name, tt_description);
+        Invoke("TT_Show", 2); 
     }
     void OnMouseExit()
     {
+        CancelInvoke("TT_Show");
         ToolTipManager._instance.Hide();
     }
 }
