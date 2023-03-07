@@ -13,6 +13,7 @@ public class EnumMaskAttribute : PropertyAttribute
         this.Enum = (Enum)Enum.GetValues(enumType).GetValue(0);
     }
 }
+
 [CustomPropertyDrawer(typeof(EnumMaskAttribute))]
 public class EnumMaskDrawer : PropertyDrawer
 {

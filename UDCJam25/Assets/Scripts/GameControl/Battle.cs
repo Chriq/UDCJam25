@@ -27,11 +27,12 @@ public class Battle : MonoBehaviour
 		}
 	}
 
-    // Update is called once per frame
     void Update() {
         if(GameManager.Instance.gameState == GameState.PLAYER_TURN) {
+			Debug.Log("Player Turn");
 			PlayerTurn();
         } else if(GameManager.Instance.gameState == GameState.ENEMY_TURN) {
+			Debug.Log("Enemy Turn");
 			Invoke("EnemyTurn", 2f);
         }
 
@@ -90,37 +91,4 @@ public class Battle : MonoBehaviour
 	void OnEnemyKilled(GameObject enemy) {
 		enemies.Remove(enemy);
 	}
-
-	/*IEnumerator EnemyTurn() {
-        yield return new WaitForSeconds(2);
-        AIInput ai = GameManager.Instance.selectedCharacter.GetComponent<AIInput>();
-        if(ai != null) {
-            int moves = ai.Move();
-            currentEnemyPoints -= moves;
-        }
-        
-		yield return new WaitForSeconds(2);
-
-		if(currentEnemyPoints <= 0) {
-			GameManager.Instance.SwitchGameState(GameState.PLAYER_TURN);
-			currentPlayerPoints = playerPointsPerTurn;
-		}
-	}
-
-    IEnumerator PlayerTurn() {
-		PlayerInput player = GameManager.Instance.selectedCharacter.GetComponent<PlayerInput>();
-        player.inputActive = true;
-		currentPlayerPoints -= player.lastMovement;
-        player.lastMovement = 0;
-
-        yield return new WaitForSeconds(2);
-
-        if(currentPlayerPoints <= 0) {
-            currentEnemyPoints = enemyPointsPerTurn;
-            if(player) {
-                player.inputActive = false;
-            }
-			GameManager.Instance.SwitchGameState(GameState.ENEMY_TURN);
-		}
-	}*/
 }
