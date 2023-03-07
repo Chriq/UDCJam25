@@ -41,7 +41,6 @@ public class CharacterController : MonoBehaviour
 	private void Update() {
 		if(transform.position != new Vector3(newPos.x, newPos.y)) {
 			if(transform.position.x != newPos.x) {
-				Debug.Log(diffX);
 				if(Mathf.Abs(transform.position.x - newPos.x) < 0.2) {
 					transform.position = new Vector3(newPos.x, transform.position.y);
 				} else {

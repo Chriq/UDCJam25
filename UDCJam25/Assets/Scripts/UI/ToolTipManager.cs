@@ -32,7 +32,7 @@ public class ToolTipManager : MonoBehaviour
 
     public void ToolTip(string name, string description)
     {
-        gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
         transform.position = Input.mousePosition;
         text_name.text = name;
         text_desc.text = description;
@@ -40,6 +40,6 @@ public class ToolTipManager : MonoBehaviour
 
     public void Hide()
     {
-        gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }
