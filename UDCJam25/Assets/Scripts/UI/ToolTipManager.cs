@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
 
-public class ToolTipManager : MonoBehaviour
+public class ToolTipManager : MonoBehaviour, IPointerClickHandler
 {
     public static ToolTipManager _instance;
 
@@ -41,6 +42,13 @@ public class ToolTipManager : MonoBehaviour
         text_name.text = name;
         text_desc.text = description;
     }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
+        Hide();
+    }
+
     public void Hide()
     {
         gameObject.SetActive(false);

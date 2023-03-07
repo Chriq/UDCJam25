@@ -49,7 +49,6 @@ public class SelectorController : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
             
-            
             // Scene Interactable
             if (interact_component != null)
             {

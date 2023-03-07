@@ -31,8 +31,6 @@ public class GameManager : MonoBehaviour {
 		selectedCharacter = GameObject.FindGameObjectWithTag("Player");
 
         gameState = GameState.RPG;
-
-		//DontDestroyOnLoad(gameObject);
 	}
 
     public void SwitchGameState(GameState gameState) {
