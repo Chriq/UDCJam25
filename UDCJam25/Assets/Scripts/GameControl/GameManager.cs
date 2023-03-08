@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Pathfinding;
 
 public class GameManager : MonoBehaviour {
     public Board board;
     public GameObject selectedCharacter;
     public GameState gameState;
+    private AstarPath pathfinder;
 
     private static GameManager _instance;
     public static GameManager Instance { 
@@ -29,8 +31,9 @@ public class GameManager : MonoBehaviour {
         }
 
 		selectedCharacter = GameObject.FindGameObjectWithTag("Player");
+        pathfinder = GameObject.Find("Pathfinding").GetComponent<AstarPath>();
 
-        gameState = GameState.RPG;
+		gameState = GameState.RPG;
 	}
 
     public void SwitchGameState(GameState gameState) {
@@ -68,9 +71,13 @@ public class GameManager : MonoBehaviour {
                 if(selectedCharacter && selectedCharacter.TryGetComponent<CharacterController>(out characterController)) {
 					characterController.characterSelected = false;
                     if(board.GetTile((int)characterController.transform.position.x, (int)characterController.transform.position.y).tileData.height == 0) {
+                        GameObject.Find("Tilemap_L2").layer = 0;
                         characterController.SetCharacterPosition(gridLocation + new Vector2Int(1, 0));
-                    } else {
+						GameObject.Find("Tilemap_L1").layer = 6;
+					} else {
+						GameObject.Find("Tilemap_L1").layer = 0;
 						characterController.SetCharacterPosition(gridLocation - new Vector2Int(1, 0));
+						GameObject.Find("Tilemap_L2").layer = 6;
 					}
 					
                 }
@@ -79,25 +86,35 @@ public class GameManager : MonoBehaviour {
 				if(selectedCharacter && selectedCharacter.TryGetComponent<CharacterController>(out characterController)) {
                     characterController.characterSelected = false;
 					if(board.GetTile((int)characterController.transform.position.x, (int)characterController.transform.position.y).tileData.height == 0) {
+						GameObject.Find("Tilemap_L2").layer = 0;
 						characterController.SetCharacterPosition(gridLocation + new Vector2Int(-1, 0));
+						GameObject.Find("Tilemap_L1").layer = 6;
 					} else {
+						GameObject.Find("Tilemap_L1").layer = 0;
 						characterController.SetCharacterPosition(gridLocation - new Vector2Int(-1, 0));
+						GameObject.Find("Tilemap_L2").layer = 6;
 					}
-					
+
 				}
 				break;
             case 9: // bottom
 				if(selectedCharacter && selectedCharacter.TryGetComponent<CharacterController>(out characterController)) {
 					characterController.characterSelected = false;
 					if(board.GetTile((int)characterController.transform.position.x, (int)characterController.transform.position.y).tileData.height == 0) {
+						GameObject.Find("Tilemap_L2").layer = 0;
 						characterController.SetCharacterPosition(gridLocation + new Vector2Int(0, 1));
+                        GameObject.Find("Tilemap_L1").layer = 6;
 					} else {
+						GameObject.Find("Tilemap_L1").layer = 0;
 						characterController.SetCharacterPosition(gridLocation - new Vector2Int(0, 1));
+						GameObject.Find("Tilemap_L2").layer = 6;
 					}
 				}
 				break;
             default: break;
         }
+
+        pathfinder.Scan();
     }
 }
 
