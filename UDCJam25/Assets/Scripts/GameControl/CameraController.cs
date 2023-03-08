@@ -51,14 +51,14 @@ public class CameraController : MonoBehaviour
             locked = !locked;
         }
 
-        // Locked - LERP to main character
+        // Locked - LERP to selected character
         if (locked)
         {
             transform.position = Vector3.Lerp(transform.position, target.transform.position + offset, lerpSpeed * Time.deltaTime);
         }
 
         // Unlocked - Free Camera through key or mouse press
-        if (!locked)
+        else
         {
             if (Input.mousePosition.y > Screen.height - borderWidth)
             {

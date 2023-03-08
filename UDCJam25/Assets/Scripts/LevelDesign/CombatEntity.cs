@@ -11,11 +11,6 @@ public class CombatEntity : MonoBehaviour
     [SerializeField] public string character_name;
     [SerializeField] public string character_desc;
     [SerializeField] float base_health;
-    /*
-    [SerializeField] float strength;
-    [SerializeField] float weight;
-    [SerializeField] float wit;
-    */
 
     // Combat Status
     public float health;
@@ -61,8 +56,8 @@ public class CombatEntity : MonoBehaviour
             {
                 continue;
             }
-            float pot = Mathf.Max(item.value_target, item.value_self) / item.use_cost;
-            if (item.use_range <= dist_closest_enemy)
+            float pot = Mathf.Max(item.item_stats.value_target, item.item_stats.value_self) / item.item_stats.use_cost;
+            if (item.item_stats.use_range <= dist_closest_enemy)
                 pot *= 2;
 
             potential += pot;
@@ -103,13 +98,13 @@ public class CombatEntity : MonoBehaviour
             Debug.LogFormat("Actions {0} - CD {1} - Use Cost {2} - Use Range {3} - Dist {4}",
                 max_actions_available,
                 item.cooldown_timer,
-                item.use_cost,
-                item.use_range,
+                item.item_stats.use_cost,
+                item.item_stats.use_range,
                 dist_closest_enemy
                 );
             if (item.cooldown_timer == 0                                                            // Off Cooldown
-                && item.use_cost <= max_actions_available                                           // Within actions remaining
-                && item.use_range <= dist_closest_enemy + max_actions_available - item.use_cost     // Within Range
+                && item.item_stats.use_cost <= max_actions_available                                           // Within actions remaining
+                && item.item_stats.use_range <= dist_closest_enemy + max_actions_available - item.item_stats.use_cost     // Within Range
                 )
             {
                 Debug.Log("Append");
@@ -123,18 +118,19 @@ public class CombatEntity : MonoBehaviour
             Item item = available_items[0];
             Debug.Log(item);
 
-            if (item.use_range > dist_closest_enemy)
+            if (item.item_stats.use_range > dist_closest_enemy)
             {
                 //TODO : Move To Enemy
                 //actions_used += ;
             }
 
             item.Use(this.gameObject.GetComponent<CombatEntity>(), closest_enemy.GetComponent<CombatEntity>());
-            actions_used += item.use_cost;
+            actions_used += item.item_stats.use_cost;
             return actions_used;
         }
 
         //TODO : Move Closer if necessary
+        //actions_used += ;
 
         return actions_used;
     }
