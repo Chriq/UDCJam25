@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item_name: Avada Kadavra
   item_icon: {fileID: 0}
-  item_effects: 3
+  item_effects: 1
   value_target: 100
   value_self: 10
   cooldown_period: 5

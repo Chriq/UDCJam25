@@ -37,21 +37,17 @@ public class CharacterController : MonoBehaviour
 		Tile currentTile = GameManager.Instance.board.GetTile((int)transform.position.x, (int)transform.position.y);
 		Tile nextTile = GameManager.Instance.board.GetTile(pos.x, pos.y);
 
-		//if (currentTile.tileData.height == nextTile.tileData.height) {
-			currentTile.isOccupied = false;
-			nextTile.isOccupied = true;
-			nextTile.occupant = gameObject;
-			currentPosition = pos;
+		currentTile.isOccupied = false;
+		nextTile.isOccupied = true;
+		nextTile.occupant = gameObject;
+		currentPosition = pos;
 
-			if(pathfinder.IsDone()) {
-				path = pathfinder.StartPath(transform.position, new Vector3(pos.x, pos.y));
-				currentWaypoint = 0;
-			}
+		if(pathfinder.IsDone()) {
+			path = pathfinder.StartPath(transform.position, new Vector3(pos.x, pos.y));
+			currentWaypoint = 0;
+		}
 
-			return (int) path.GetTotalLength();
-		//}
-
-		return 0;
+		return (int) path.GetTotalLength();
 	}
 
 	private void Update() {
