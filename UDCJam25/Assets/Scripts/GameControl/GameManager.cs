@@ -140,16 +140,23 @@ public class GameManager : MonoBehaviour {
             case GameState.RPG:
                 // TODO : Free Move
                 break;
+
             case GameState.PLAYER_TURN:
                 // TODO : Item Interaction
 
+                // Left Click On Board - Use Item
+                // Right Click - Cancel Item
+
+                // End turn when no actions remaining
                 if(battleController.currentPlayerPoints <= 0) {
                     battleController.PlayerTurnEnd();
                 }
                 break;
+
             case GameState.ENEMY_TURN:
                 // Wait
                 break;
+
             default:
                 break;
         }
