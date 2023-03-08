@@ -9,6 +9,7 @@ TagManager:
   - UI_Selected_Name
   - UI_Selected_Desc
   - UI_Items
+  - UI_EndTurn
   layers:
   - Default
   - TransparentFX

@@ -9,8 +9,8 @@ public class Item
     [SerializeField] public ItemScriptable item_stats;
 
     // Combat Status
-    public int cooldown_timer;
-    public int ammo;
+    [HideInInspector] public int cooldown_timer;
+    [HideInInspector] public int ammo;
 
     // Call at start of scene/combat to set cd and ammo
     public void Init()
@@ -25,8 +25,8 @@ public class Item
     // Use the item on the given target
     public int Use(CombatEntity self, CombatEntity target)
     {
-        ammo--;
-        cooldown_timer = item_stats.cooldown_period;
+        this.ammo--;
+        this.cooldown_timer = item_stats.cooldown_period;
 
         if (Random.Range(0, 1) > item_stats.success_probability)
         {
@@ -75,14 +75,14 @@ public class Item
         if (cooldown_timer <= 0)
             return;
 
-        switch (ammo)
+        switch (this.ammo)
         {
             case 0:
-                ammo++;
-                cooldown_timer = item_stats.reload_period;
+                this.ammo++;
+                this.cooldown_timer = item_stats.reload_period;
                 break;
             default:
-                cooldown_timer--;
+                this.cooldown_timer--;
                 break;
         }
     }

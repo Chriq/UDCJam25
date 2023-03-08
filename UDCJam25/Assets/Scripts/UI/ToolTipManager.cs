@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ToolTipManager : MonoBehaviour
+public class ToolTipManager : MonoBehaviour, IPointerClickHandler
 {
     public static ToolTipManager _instance;
+
+    [SerializeField] Vector2 screen_offset = new Vector2(20, 15);
 
     TextMeshProUGUI text_name;
     TextMeshProUGUI text_desc;
@@ -25,21 +27,19 @@ public class ToolTipManager : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
         text_name = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         text_desc = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
 
-    public void ToolTip(string name, string description)
+    public void ToolTip(Vector2 sceen_pos, string name, string description)
     {
-        this.gameObject.SetActive(true);
-        transform.position = Input.mousePosition;
+        this.transform.position = sceen_pos + screen_offset;
         text_name.text = name;
         text_desc.text = description;
     }
 
-    public void Hide()
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        this.gameObject.SetActive(false);
+        this.transform.position = new Vector2(-100, -100);
     }
 }
