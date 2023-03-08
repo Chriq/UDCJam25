@@ -68,10 +68,9 @@ public class CombatEntity : MonoBehaviour
 
         return potential;
     }
-    public int AutoPlay(List<GameObject> enemies, int max_actions_available)
+    public void AutoPlay(List<GameObject> enemies, ref int max_actions_available)
     {
         Debug.Log("AUTOPLAY");
-        int actions_used = 0;
         int dist_closest_enemy = 100;
         GameObject closest_enemy = enemies[0];
 
@@ -89,7 +88,6 @@ public class CombatEntity : MonoBehaviour
                 dist_closest_enemy = dist;
             }
         }
-        Debug.Log(closest_enemy);
 
         // Scan Items for availability
         List<Item> available_items = new List<Item>();
@@ -104,7 +102,7 @@ public class CombatEntity : MonoBehaviour
                 );
             if (item.cooldown_timer == 0                                                            // Off Cooldown
                 && item.item_stats.use_cost <= max_actions_available                                           // Within actions remaining
-                && item.item_stats.use_range <= dist_closest_enemy + max_actions_available - item.item_stats.use_cost     // Within Range
+                && item.item_stats.use_range >= dist_closest_enemy - max_actions_available + item.item_stats.use_cost     // Within Range
                 )
             {
                 Debug.Log("Append");
@@ -116,23 +114,20 @@ public class CombatEntity : MonoBehaviour
         if (available_items.Count > 0)
         {
             Item item = available_items[0];
-            Debug.Log(item);
+            Debug.Log(item.item_stats.item_name);
 
             if (item.item_stats.use_range > dist_closest_enemy)
             {
                 //TODO : Move To Enemy
-                //actions_used += ;
+                //max_actions_available -=
             }
 
             item.Use(this.gameObject.GetComponent<CombatEntity>(), closest_enemy.GetComponent<CombatEntity>());
-            actions_used += item.item_stats.use_cost;
-            return actions_used;
+            max_actions_available -= item.item_stats.use_cost;
         }
 
         //TODO : Move Closer if necessary
-        //actions_used += ;
-
-        return actions_used;
+        //max_actions_available -=
     }
 
     // Combat Modifications

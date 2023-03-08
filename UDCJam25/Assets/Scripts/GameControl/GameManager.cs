@@ -6,10 +6,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum GameState
+{
+    RPG,
+    PLAYER_TURN,
+    ENEMY_TURN
+}
+
 public class GameManager : MonoBehaviour {
     public Board board;
     public GameObject selectedCharacter;
     public GameState gameState;
+    public Battle battleController;
     [SerializeField] public Item selectedItem;
 
     private static GameManager _instance;
@@ -38,7 +46,11 @@ public class GameManager : MonoBehaviour {
             board = new GameObject("Board").AddComponent<Board>();
         }
 
-		selected_name = GameObject.FindGameObjectWithTag("UI_Selected_Name").GetComponent<TMP_Text>();
+        battleController = GameObject.Find("Battle").GetComponent<Battle>();
+
+        GameObject.FindGameObjectWithTag("UI_Selected_Name").GetComponent<Button>();
+
+        selected_name = GameObject.FindGameObjectWithTag("UI_Selected_Name").GetComponent<TMP_Text>();
         selected_desc = GameObject.FindGameObjectWithTag("UI_Selected_Desc").GetComponent<TMP_Text>();
         selected_items = GameObject.FindGameObjectsWithTag("UI_Items");
         selected_items_text = selected_items.Select(
@@ -50,6 +62,11 @@ public class GameManager : MonoBehaviour {
         gameState = GameState.RPG;
 	}
 
+    public void SwitchGameState(GameState gameState)
+    {
+        this.gameState = gameState;
+    }
+
     public void SetSelectedCharacter(GameObject sel)
     {
         selectedCharacter = sel;
@@ -59,7 +76,6 @@ public class GameManager : MonoBehaviour {
         selected_name.text = ce.character_name;
         selected_desc.text = ce.character_desc;
 
-        Debug.LogFormat("Item Count: {0}, ", ce.items.Count);
         for (int i = 0; i < ce.items.Count; i++)
         {
             Item item = ce.items[i];
@@ -94,10 +110,6 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void SwitchGameState(GameState gameState) {
-        this.gameState = gameState;
-    }
-
     // returns 'ok' if cell is free, otherwise return object tag
     public string ValidateCharacterMovement(Vector2Int destination) {
         Tile tile = board.GetTile(destination.x, destination.y);
@@ -120,10 +132,26 @@ public class GameManager : MonoBehaviour {
 
         return null;
     }
-}
 
-public enum GameState {
-    RPG,
-    PLAYER_TURN,
-    ENEMY_TURN
+    private void Update()
+    {
+        switch (gameState)
+        {
+            case GameState.RPG:
+                // TODO : Free Move
+                break;
+            case GameState.PLAYER_TURN:
+                // TODO : Item Interaction
+
+                if(battleController.currentPlayerPoints <= 0) {
+                    battleController.PlayerTurnEnd();
+                }
+                break;
+            case GameState.ENEMY_TURN:
+                // Wait
+                break;
+            default:
+                break;
+        }
+    }
 }

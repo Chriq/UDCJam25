@@ -13,6 +13,7 @@ public class ToolTip : MonoBehaviour
     }
     void OnMouseEnter()
     {
+        Debug.Log("TT - Mouse Enter");
         Invoke("TT_Show", 2); 
     }
     void OnMouseExit()

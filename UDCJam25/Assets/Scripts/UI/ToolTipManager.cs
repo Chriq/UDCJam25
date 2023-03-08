@@ -32,8 +32,9 @@ public class ToolTipManager : MonoBehaviour
 
     public void ToolTip(string name, string description)
     {
+        Debug.Log("TT - ToolTip");
         this.gameObject.SetActive(true);
-        transform.position = Input.mousePosition;
+        this.transform.position = Input.mousePosition;
         text_name.text = name;
         text_desc.text = description;
     }
