@@ -82,7 +82,7 @@ public class CombatEntity : MonoBehaviour
                 Mathf.Abs(enemy.transform.position.y - this.gameObject.transform.position.y)
                 );
 
-            if (dist_closest_enemy > dist)
+            if (dist < dist_closest_enemy)
             {
                 closest_enemy = enemy;
                 dist_closest_enemy = dist;

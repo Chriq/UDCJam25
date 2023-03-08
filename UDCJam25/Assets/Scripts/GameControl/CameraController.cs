@@ -76,19 +76,19 @@ public class CameraController : MonoBehaviour
             {
                 transform.Translate(-camSpeed * Time.deltaTime, 0, 0);
             }
-            if (Input.GetButtonDown("Camera Up"))
+            if (Input.GetButton("Camera Up"))
             {
                 transform.Translate(0, camSpeed * Time.deltaTime, 0);
             }
-            if (Input.GetButtonDown("Camera Down"))
+            if (Input.GetButton("Camera Down"))
             {
                 transform.Translate(0, -camSpeed * Time.deltaTime, 0);
             }
-            if (Input.GetButtonDown("Camera Right"))
+            if (Input.GetButton("Camera Right"))
             {
                 transform.Translate(camSpeed * Time.deltaTime, 0, 0);
             }
-            if (Input.GetButtonDown("Camera Left"))
+            if (Input.GetButton("Camera Left"))
             {
                 transform.Translate(-camSpeed * Time.deltaTime, 0, 0);
             }
