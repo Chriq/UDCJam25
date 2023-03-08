@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - UI_ActionsRemaining
+  - UI_Selected_Name
+  - UI_Selected_Desc
+  - UI_Items
   layers:
   - Default
   - TransparentFX
