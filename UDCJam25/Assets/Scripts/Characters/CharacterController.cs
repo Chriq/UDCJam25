@@ -18,6 +18,10 @@ public class CharacterController : MonoBehaviour
 
 	public Vector2Int currentPosition;
 
+	private void Awake() {
+		pathfinder = gameObject.GetComponent<Seeker>();
+	}
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -28,6 +32,8 @@ public class CharacterController : MonoBehaviour
 		}
 		
 		currentPosition = startingPosition;
+
+		
 
 		GameManager.Instance.board.GetTile(startingPosition.x, startingPosition.y).isOccupied = true;
 		GameManager.Instance.board.GetTile(startingPosition.x, startingPosition.y).occupant = gameObject;
