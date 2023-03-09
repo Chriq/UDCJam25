@@ -6,7 +6,6 @@ using static UnityEditor.PlayerSettings;
 
 public class CharacterController : MonoBehaviour
 {
-	public Vector2Int startingPosition;
 	public float characterSpeed = 10f;
 	public bool characterSelected = false;
 
@@ -22,21 +21,12 @@ public class CharacterController : MonoBehaviour
 		pathfinder = gameObject.GetComponent<Seeker>();
 	}
 
-	// Start is called before the first frame update
 	void Start()
-    {
-		if(startingPosition != Vector2Int.zero) {
-			transform.position = new Vector3(startingPosition.x, startingPosition.y);
-		} else {
-			startingPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
-		}
-		
-		currentPosition = startingPosition;
+    {		
+		currentPosition = new Vector2Int((int) transform.position.x, (int) transform.position.y);
 
-		
-
-		GameManager.Instance.board.GetTile(startingPosition.x, startingPosition.y).isOccupied = true;
-		GameManager.Instance.board.GetTile(startingPosition.x, startingPosition.y).occupant = gameObject;
+		GameManager.Instance.board.GetTile(currentPosition.x, currentPosition.y).isOccupied = true;
+		GameManager.Instance.board.GetTile(currentPosition.x, currentPosition.y).occupant = gameObject;
 	}
 
     public int SetCharacterPosition(Vector2Int pos) {
