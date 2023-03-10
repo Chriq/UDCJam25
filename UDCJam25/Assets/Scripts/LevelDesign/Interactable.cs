@@ -7,6 +7,7 @@ enum InteractableEffects
 {
     Load_Scene          = 1,
     Change_Elevation    = 2,
+    Dialogue            = 3,
 }
 enum InteractableEffectsValue
 {
@@ -37,5 +38,8 @@ public class Interactable : MonoBehaviour
         else if((int_effect == InteractableEffects.Change_Elevation)) {
 			GameManager.Instance.ChangeCharacterElevation((int)int_effects_value, gameObject.transform.position);
 		}
+        else if((int_effect == InteractableEffects.Dialogue)) {
+            Debug.Log("Begin Dialogue");
+        }
 	}
 }

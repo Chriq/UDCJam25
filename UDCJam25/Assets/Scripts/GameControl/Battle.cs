@@ -49,9 +49,6 @@ public class Battle : MonoBehaviour
 				item.Init();
 			}
 		}
-
-		// Sstart Combat
-		PlayerTurnStart();
 	}
 	
 	/*
@@ -166,6 +163,14 @@ public class Battle : MonoBehaviour
 		if (enemies.Count == 0)
 		{
 			WinBattle();
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision) {
+		Debug.Log("Test");
+		if(collision.gameObject.tag == "Player") {
+			// Sstart Combat
+			PlayerTurnStart();
 		}
 	}
 }
