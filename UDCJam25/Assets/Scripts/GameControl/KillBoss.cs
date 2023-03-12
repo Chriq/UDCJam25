@@ -14,7 +14,7 @@ public class KillBoss : MonoBehaviour
 				Destroy(GameObject.Find("Rockefeller"));
 				GameData.Instance.rockefellerKilled = true;
 				break;
-            case "JPMorgan":
+            case "JP Morgan":
 				Destroy(GameObject.Find("JP Morgan"));
 				GameData.Instance.jpMorganKilled = true;
 				break;
