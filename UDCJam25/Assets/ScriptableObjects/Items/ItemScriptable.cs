@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 // Effects Enumerator
@@ -24,7 +25,7 @@ public class ItemScriptable : ScriptableObject
     public Sprite item_icon;
 
     // Combat Effect
-    [EnumMask(typeof(ItemEffects))] public int item_effects;
+    public int item_effects;
     public float value_target;
     public float value_self;
 

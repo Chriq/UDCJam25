@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
     GameObject[] selected_items;
     List<List<TMP_Text>> selected_items_text;
     GameObject dialog_canvas;
+    GameObject selected_canvas;
 
     public static GameManager Instance { 
         get { 
@@ -61,7 +62,10 @@ public class GameManager : MonoBehaviour {
             ).ToList<List<TMP_Text>>();
         dialog_canvas = GameObject.Find("UI_Canvas_Dialog");
         dialog_canvas.SetActive(false);
-        SetSelectedCharacter(GameObject.FindGameObjectWithTag("Player"));
+
+		selected_canvas = GameObject.Find("UI_Canvas_Selected");
+		selected_canvas.SetActive(false);
+		SetSelectedCharacter(GameObject.FindGameObjectWithTag("Player"));
         pathfinder = GameObject.Find("Pathfinding").GetComponent<AstarPath>();
 
 		gameState = GameState.RPG;
@@ -242,6 +246,12 @@ public class GameManager : MonoBehaviour {
 			default:
 				break;
 		}
+
+        if(selectedCharacter && selectedCharacter.GetComponent<CharacterController>() && selectedCharacter.GetComponent<CharacterController>().characterSelected) {
+            selected_canvas.SetActive(true);
+        } else {
+            selected_canvas.SetActive(false);
+        }
 	}
 }
 

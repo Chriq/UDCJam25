@@ -12,13 +12,11 @@ enum InteractableEffects
 }
 enum InteractableEffectsValue
 {
-    Scene_SafeHouse     = 0,
-    Scene_1             = 1,
-    Scene_2             = 2,
-    Scene_3             = 3,
-    Scene_4             = 4,
-    Scene_5             = 5,
-    Scene_6             = 6,
+    Scene_SafeHouse     = 1,
+    Scene_1             = 2,
+    Scene_2             = 3,
+    Scene_3             = 4,
+    Scene_4             = 5,
 
 	Elevation_Left      = 7,
 	Elevation_Right     = 8,
@@ -42,7 +40,11 @@ public class Interactable : MonoBehaviour
         if (int_effect == InteractableEffects.Load_Scene)
         {
             GameManager.Instance.ClearDialog();
-            SceneManager.LoadScene((int)int_effects_value);
+			if(GameData.Instance.carnegieObjectiveComplete && GameData.Instance.rockefellerObjectiveComplete && GameData.Instance.jpMorganObjectiveComplete) {
+				SceneManager.LoadScene("End");
+			} else {
+				SceneManager.LoadScene((int)int_effects_value);
+			}
         } 
         else if((int_effect == InteractableEffects.Change_Elevation)) {
 			GameManager.Instance.ChangeCharacterElevation((int)int_effects_value, gameObject.transform.position);

@@ -1627,7 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   int_effect: 3
-  int_effects_value: 0
+  int_effects_value: 1
   dialog_speaker: Blob D. Rockefeller
   dialog_text: You insolent magic scum! You'll pay for the desctruction you've caused!
 --- !u!212 &562049515
@@ -1878,6 +1878,9 @@ MonoBehaviour:
   health: 0
   items:
   - item_stats: {fileID: 11400000, guid: f0d92fa980c1a0c4a9ebdc55e066b16e, type: 2}
+    cooldown_timer: 0
+    ammo: 0
+  - item_stats: {fileID: 11400000, guid: 4a53fb74a5910174287ef47885234e3a, type: 2}
     cooldown_timer: 0
     ammo: 0
 --- !u!114 &591369425
@@ -3513,6 +3516,9 @@ MonoBehaviour:
   - item_stats: {fileID: 11400000, guid: f0d92fa980c1a0c4a9ebdc55e066b16e, type: 2}
     cooldown_timer: 0
     ammo: 0
+  - item_stats: {fileID: 11400000, guid: 4a53fb74a5910174287ef47885234e3a, type: 2}
+    cooldown_timer: 0
+    ammo: 0
 --- !u!114 &686852842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3828,7 +3834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   int_effect: 1
-  int_effects_value: 0
+  int_effects_value: 1
   dialog_speaker: 
   dialog_text: 
 --- !u!212 &726203063
@@ -6791,6 +6797,9 @@ MonoBehaviour:
   health: 0
   items:
   - item_stats: {fileID: 11400000, guid: f0d92fa980c1a0c4a9ebdc55e066b16e, type: 2}
+    cooldown_timer: 0
+    ammo: 0
+  - item_stats: {fileID: 11400000, guid: 4a53fb74a5910174287ef47885234e3a, type: 2}
     cooldown_timer: 0
     ammo: 0
 --- !u!114 &1166523505
@@ -21340,6 +21349,9 @@ MonoBehaviour:
   health: 0
   items:
   - item_stats: {fileID: 11400000, guid: f0d92fa980c1a0c4a9ebdc55e066b16e, type: 2}
+    cooldown_timer: 0
+    ammo: 0
+  - item_stats: {fileID: 11400000, guid: 4a53fb74a5910174287ef47885234e3a, type: 2}
     cooldown_timer: 0
     ammo: 0
 --- !u!114 &2128060438

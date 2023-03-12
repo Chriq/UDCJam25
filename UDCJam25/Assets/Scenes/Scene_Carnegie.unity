@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   int_effect: 3
-  int_effects_value: 0
+  int_effects_value: 1
   dialog_speaker: Andrew Carnegie
   dialog_text: So you're the revolutionaries I've heard about. I can't say I blame
     you for your actions, but surely a compromise can be made in everyone's interest.
@@ -2029,7 +2029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   int_effect: 1
-  int_effects_value: 0
+  int_effects_value: 1
   dialog_speaker: 
   dialog_text: 
 --- !u!212 &1438845352
@@ -2871,51 +2871,59 @@ CanvasRenderer:
 --- !u!1 &1124319037565860352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1661927036095108590, guid: 52826dba85076f24f98e095f77022180, type: 3}
-  m_PrefabInstance: {fileID: 1768291639996149742}
+  m_PrefabInstance: {fileID: 1703861430423669065}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1124319037850286255 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1661927037956593473, guid: 52826dba85076f24f98e095f77022180, type: 3}
-  m_PrefabInstance: {fileID: 1768291639996149742}
+  m_PrefabInstance: {fileID: 1703861430423669065}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1124319038513064095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1661927037579085681, guid: 52826dba85076f24f98e095f77022180, type: 3}
-  m_PrefabInstance: {fileID: 1768291639996149742}
+  m_PrefabInstance: {fileID: 1703861430423669065}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1124319038614447250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1661927037546384252, guid: 52826dba85076f24f98e095f77022180, type: 3}
-  m_PrefabInstance: {fileID: 1768291639996149742}
+  m_PrefabInstance: {fileID: 1703861430423669065}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1768291639996149742
+--- !u!1001 &1703861430423669065
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1703861431285104846, guid: 52826dba85076f24f98e095f77022180, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703861431285104846, guid: 52826dba85076f24f98e095f77022180, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703861431636911201, guid: 52826dba85076f24f98e095f77022180, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703861431636911201, guid: 52826dba85076f24f98e095f77022180, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703861431815849093, guid: 52826dba85076f24f98e095f77022180, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703861431815849093, guid: 52826dba85076f24f98e095f77022180, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1768291639129532009, guid: 52826dba85076f24f98e095f77022180, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1768291639129532009, guid: 52826dba85076f24f98e095f77022180, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1768291640010177009, guid: 52826dba85076f24f98e095f77022180, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1768291640010177009, guid: 52826dba85076f24f98e095f77022180, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1768291640754594338, guid: 52826dba85076f24f98e095f77022180, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1768291640754594338, guid: 52826dba85076f24f98e095f77022180, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -2967,14 +2975,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Players
       objectReference: {fileID: 0}
-    - target: {fileID: 1768291640924160710, guid: 52826dba85076f24f98e095f77022180, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1768291640924160710, guid: 52826dba85076f24f98e095f77022180, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52826dba85076f24f98e095f77022180, type: 3}
 --- !u!61 &4596161049821473864
@@ -3017,7 +3017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character_name: Enemy
   character_desc: Enemy
-  base_health: 15
+  base_health: 25
   health_bar: {fileID: 1950641264}
   health: 0
   items:
@@ -3417,7 +3417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character_name: Enemy
   character_desc: Enemy
-  base_health: 15
+  base_health: 25
   health_bar: {fileID: 690682739}
   health: 0
   items:
@@ -3594,7 +3594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character_name: Enemy
   character_desc: Enemy
-  base_health: 15
+  base_health: 25
   health_bar: {fileID: 1383283431}
   health: 0
   items:

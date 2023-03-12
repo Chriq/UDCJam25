@@ -60,13 +60,15 @@ public class Battle : MonoBehaviour
 
 	public void UpdatePlayerActions(int sub)
     {
-		currentPlayerPoints -= sub;
-		if(currentPlayerPoints <= 0) {
-			currentPlayerPoints = 0;
-			PlayerTurnEnd();
-		}
+		if(GameManager.Instance.gameState == GameState.PLAYER_TURN) {
+			currentPlayerPoints -= sub;
+			if(currentPlayerPoints <= 0) {
+				currentPlayerPoints = 0;
+				PlayerTurnEnd();
+			}
 
-		UI_ActionsRemaining.text = currentPlayerPoints.ToString();
+			UI_ActionsRemaining.text = currentPlayerPoints.ToString();
+		}
 	}
 
 	void PlayEenmy_PriorityQueue()
@@ -103,7 +105,7 @@ public class Battle : MonoBehaviour
 		UpdatePlayerActions(0);
 
 		GameManager.Instance.SwitchGameState(GameState.PLAYER_TURN);
-		GameManager.Instance.SetSelectedCharacter(GameObject.Find("Player"));
+		//GameManager.Instance.SetSelectedCharacter(GameObject.Find("Player"));
 		//UpdatePlayerActions(playerPointsPerTurn, 0);
 
 		// Cycle all Items
