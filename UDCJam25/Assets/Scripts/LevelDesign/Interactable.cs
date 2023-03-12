@@ -58,23 +58,11 @@ public class Interactable : MonoBehaviour
                     Destroy(gameObject);
                     break;
 				case 11:
-					GameData.Instance.carnegieKilled = true;
-					Destroy(gameObject);
-					break;
-				case 12:
 					GameData.Instance.rockefellerObjectiveComplete = true;
 					Destroy(gameObject);
 					break;
-				case 13:
-					GameData.Instance.rockefellerKilled = true;
-					Destroy(gameObject);
-					break;
-				case 14:
+				case 12:
 					GameData.Instance.jpMorganObjectiveComplete = true;
-					Destroy(gameObject);
-					break;
-				case 15:
-					GameData.Instance.jpMorganKilled = true;
 					Destroy(gameObject);
 					break;
 			}
