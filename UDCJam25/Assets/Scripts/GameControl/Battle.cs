@@ -16,6 +16,7 @@ public class Battle : MonoBehaviour
 	[SerializeField] int currentEnemyPoints;
 	public List<GameObject> players;
 
+	[SerializeField] GameObject UI_Canvas_Combat;
 	[SerializeField] TMP_Text UI_ActionsRemaining;
 
 	void Start()
@@ -30,10 +31,6 @@ public class Battle : MonoBehaviour
 
     private void Awake()
     {
-		UI_ActionsRemaining = GameObject.FindGameObjectWithTag("UI_ActionsRemaining").GetComponent<TMP_Text>();
-
-		GameObject.FindGameObjectWithTag("UI_EndTurn").GetComponent<Button>().onClick.AddListener(PlayerTurnEnd);
-
 		// Initialize all items
 		foreach (GameObject obj in enemies)
 		{
@@ -61,9 +58,14 @@ public class Battle : MonoBehaviour
     }
 	*/
 
-	void UpdatePlayerActions(int current, int sub)
+	public void UpdatePlayerActions(int sub)
     {
-		currentPlayerPoints = current - sub;
+		currentPlayerPoints -= sub;
+		if(currentPlayerPoints <= 0) {
+			currentPlayerPoints = 0;
+			PlayerTurnEnd();
+		}
+
 		UI_ActionsRemaining.text = currentPlayerPoints.ToString();
 	}
 
@@ -97,9 +99,12 @@ public class Battle : MonoBehaviour
 	void PlayerTurnStart() {
 		Debug.Log("Player Turn Start");
 		// Start Turn
+		currentPlayerPoints = playerPointsPerTurn;
+		UpdatePlayerActions(0);
+
 		GameManager.Instance.SwitchGameState(GameState.PLAYER_TURN);
 		GameManager.Instance.SetSelectedCharacter(GameObject.Find("Player"));
-		UpdatePlayerActions(playerPointsPerTurn, 0);
+		//UpdatePlayerActions(playerPointsPerTurn, 0);
 
 		// Cycle all Items
 		foreach (GameObject obj in enemies)
@@ -140,11 +145,13 @@ public class Battle : MonoBehaviour
 		Debug.Log("Battle Won");
 		GameManager.Instance.SetSelectedCharacter(GameObject.Find("Player"));
 		GameManager.Instance.SwitchGameState(GameState.RPG);
+		UI_Canvas_Combat.SetActive(false);
 		Destroy(gameObject);
 	}
 
 	void LoseBattle() {
 		Debug.Log("Battle Lost");
+		UI_Canvas_Combat.SetActive(false);
 		Destroy(gameObject);
 	}
 
@@ -170,6 +177,15 @@ public class Battle : MonoBehaviour
 		Debug.Log("Test");
 		if(collision.gameObject.tag == "Player") {
 			// Sstart Combat
+			currentPlayerPoints = playerPointsPerTurn;
+			currentEnemyPoints = enemyPointsPerTurn;
+
+			UI_Canvas_Combat.SetActive(true);
+
+			UI_ActionsRemaining = GameObject.FindGameObjectWithTag("UI_ActionsRemaining").GetComponent<TMP_Text>();
+			GameObject.FindGameObjectWithTag("UI_EndTurn").GetComponent<Button>().onClick.AddListener(PlayerTurnEnd);
+
+			UI_ActionsRemaining.text = currentPlayerPoints.ToString();
 			PlayerTurnStart();
 		}
 	}

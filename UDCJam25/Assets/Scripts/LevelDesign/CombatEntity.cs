@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class CombatEntity : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class CombatEntity : MonoBehaviour
     [SerializeField] public string character_name;
     [SerializeField] public string character_desc;
     [SerializeField] float base_health;
+
+    [SerializeField] Slider health_bar;
 
     // Combat Status
     public float health;
@@ -25,7 +28,9 @@ public class CombatEntity : MonoBehaviour
     void Awake()
     {
         health = base_health;
-        if(onKilledEvent == null) {
+        health_bar.maxValue = base_health;
+
+		if(onKilledEvent == null) {
             onKilledEvent = new OnKilledEvent();
         }
     }
@@ -102,7 +107,7 @@ public class CombatEntity : MonoBehaviour
                 );
             if (item.cooldown_timer == 0                                                            // Off Cooldown
                 && item.item_stats.use_cost <= max_actions_available                                           // Within actions remaining
-                && item.item_stats.use_range >= dist_closest_enemy - max_actions_available + item.item_stats.use_cost     // Within Range
+                && item.item_stats.use_range >= dist_closest_enemy// - max_actions_available + item.item_stats.use_cost     // Within Range
                 )
             {
                 Debug.Log("Append");
@@ -116,19 +121,22 @@ public class CombatEntity : MonoBehaviour
             Item item = available_items[0];
             Debug.Log(item.item_stats.item_name);
 
-            if (item.item_stats.use_range > dist_closest_enemy)
+            /*if (item.item_stats.use_range > dist_closest_enemy)
             {
-                //TODO : Move To Enemy
-                //max_actions_available -=
-            }
+                Vector2Int move_to_enemy = new Vector2Int((int) closest_enemy.transform.position.x, (int) closest_enemy.transform.position.y) + new Vector2Int(1, 0);
+                max_actions_available -= gameObject.GetComponent<CharacterController>().SetCharacterPosition(move_to_enemy);
+            }*/
 
             item.Use(this.gameObject.GetComponent<CombatEntity>(), closest_enemy.GetComponent<CombatEntity>());
             max_actions_available -= item.item_stats.use_cost;
-        }
-
-        //TODO : Move Closer if necessary
-        //max_actions_available -=
-    }
+        } else {
+			Vector2Int move_to_enemy = new Vector2Int((int)closest_enemy.transform.position.x, (int)closest_enemy.transform.position.y) + new Vector2Int(1, 0);
+            CharacterController controller = gameObject.GetComponent<CharacterController>();
+            controller.maxPathLength = max_actions_available;
+			max_actions_available -= controller.SetCharacterPosition(move_to_enemy);
+			controller.maxPathLength = 0;
+		}
+	}
 
     // Combat Modifications
     public void Damage(float damage)
@@ -140,7 +148,8 @@ public class CombatEntity : MonoBehaviour
         }
 
         health -= damage;
-        if (health <= 0)
+		health_bar.value = health;
+		if (health <= 0)
         {
             onKilledEvent.Invoke(this.gameObject);
             Destroy(this.gameObject);
@@ -149,7 +158,8 @@ public class CombatEntity : MonoBehaviour
     public void Heal(float damage)
     {
         health = Mathf.Clamp(health + damage, 0, base_health);
-    }
+		health_bar.value = health;
+	}
     public void Stun()
     {
         stunned = true;

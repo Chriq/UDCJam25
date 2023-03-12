@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     TMP_Text selected_desc;
     GameObject[] selected_items;
     List<List<TMP_Text>> selected_items_text;
+    GameObject dialog_canvas;
 
     public static GameManager Instance { 
         get { 
@@ -58,7 +59,8 @@ public class GameManager : MonoBehaviour {
         selected_items_text = selected_items.Select(
             obj => obj.GetComponentsInChildren<TMP_Text>().ToList<TMP_Text>()
             ).ToList<List<TMP_Text>>();
-
+        dialog_canvas = GameObject.Find("UI_Canvas_Dialog");
+        dialog_canvas.SetActive(false);
         SetSelectedCharacter(GameObject.FindGameObjectWithTag("Player"));
         pathfinder = GameObject.Find("Pathfinding").GetComponent<AstarPath>();
 
@@ -188,6 +190,31 @@ public class GameManager : MonoBehaviour {
         }
 
         pathfinder.Scan();
+    }
+
+    public void ToggleDialog(string speaker, string text) {
+        TMP_Text[] dialog = dialog_canvas.GetComponentsInChildren<TMP_Text>();
+        dialog[0].text = speaker;
+        dialog[1].text = text;
+
+		dialog_canvas.SetActive(!dialog_canvas.activeInHierarchy);
+    }
+
+    public void ClearDialog() {
+		dialog_canvas.SetActive(false);
+	}
+
+    public int UseSelectedItem(CombatEntity self, CombatEntity target) {
+        if(selectedItem != null) {
+            selectedItem.Use(self, target);
+            return selectedItem.item_stats.use_cost;
+        }
+
+        return 0;
+    }
+
+    public void UpdateBattlePoints(int pointsUsed) {
+        battleController.UpdatePlayerActions(pointsUsed);
     }
 
 	private void Update() {

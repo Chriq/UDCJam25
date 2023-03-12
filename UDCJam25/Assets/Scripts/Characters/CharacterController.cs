@@ -17,6 +17,8 @@ public class CharacterController : MonoBehaviour
 
 	public Vector2Int currentPosition;
 
+	public int maxPathLength = 0;
+
 	private void Awake() {
 		pathfinder = gameObject.GetComponent<Seeker>();
 	}
@@ -40,10 +42,16 @@ public class CharacterController : MonoBehaviour
 
 		if(pathfinder.IsDone()) {
 			path = pathfinder.StartPath(transform.position, new Vector3(pos.x, pos.y));
+			Debug.Log("MYLog: " + path.GetTotalLength());
 			currentWaypoint = 0;
 		}
 
-		return (int) path.GetTotalLength();
+		if(path.vectorPath.Count > 0) {
+			return path.vectorPath.Count - 1;
+		} else {
+			return 0;
+		}
+		
 	}
 
 	private void Update() {
@@ -51,7 +59,7 @@ public class CharacterController : MonoBehaviour
 			return;
 		}
 
-		if(currentWaypoint >= path.vectorPath.Count) {
+		if(currentWaypoint >= path.vectorPath.Count || (currentWaypoint > maxPathLength && maxPathLength > 0)) {
 			reachedEndOfPath = true;
 			if(path.vectorPath.Count > 0) {
 				transform.position = new Vector3(currentPosition.x, currentPosition.y);

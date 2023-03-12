@@ -17,9 +17,9 @@ MonoBehaviour:
   item_effects: 1
   value_target: 10
   value_self: 0
-  cooldown_period: 3
+  cooldown_period: 0
   reload_period: 4
-  ammunition: 5
+  ammunition: 100
   use_range: 2
   use_cost: 2
   success_probability: 1

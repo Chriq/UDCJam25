@@ -20,6 +20,6 @@ MonoBehaviour:
   cooldown_period: 2
   reload_period: 1
   ammunition: 20
-  use_range: 10
+  use_range: 3
   use_cost: 1
   success_probability: 0.99
